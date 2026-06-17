@@ -36,7 +36,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\small 格物助航｜每日一练}
-\rhead{\small 2026.6.11}
+\rhead{\small 2026.6.18}
 \cfoot{\small 第 \thepage\ 页 / 共 \pageref{LastPage} 页}
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -94,7 +94,7 @@
 
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\emf}{\mathcal{E}}
-\graphicspath{{fig_6.11/}}
+\graphicspath{{fig_6.18/}}
 
 \begin{document}
 
@@ -103,7 +103,7 @@
  \vspace{0.25em}
  {\large 物理学：电磁感应}\par
  \vspace{0.35em}
- {\small 2026年6月11日}\par
+ {\small 2026年6月18日}\par
  \vspace{0.35em}
  {\small 编写：拯救世界的大小王}
 \end{center}
@@ -115,7 +115,7 @@
 如图所示，一根无限长直导线与矩形线圈 $ABCD$ 共面。长直导线中的电流沿竖直向上方向，矩形线圈的左边 $AD$ 与长直导线平行，二者相距为 $a$，线圈宽度为 $b$，高度为 $l$，线圈总电阻为 $\mathcal R$。忽略线圈自感。规定从纸面看逆时针方向为线圈电流正方向，面积正方向取垂直纸面向外。
 
 \begin{center}
- \includegraphics[width=0.86\linewidth]{induction_loop_wire.png}
+ \includegraphics[width=0.86\linewidth]{fig_6.18/2026.6.18.png}
 \end{center}
 
 \begin{enumerate}
@@ -143,7 +143,7 @@
 \section*{详细解法}
 
 \subsection*{一、先写出长直导线右侧的磁场}
-长直导线中电流向上，根据右手螺旋定则，导线右侧磁场方向垂直纸面向里。距离导线为 $x$ 处的磁感应强度大小为
+长直导线中电流向上，根据右手螺旋定则，导线右侧磁场方向垂直纸面向里。距离导线为 $x$ 处的磁感应强度的代数量为
 \begin{equation}
  B(x,t)=\frac{\mu_0 I(t)}{2\pi x}.
  \label{eq:b-long-wire}
@@ -186,7 +186,7 @@
  \label{eq:emf-sinusoidal}
 \end{equation}
 
-这里的正号表示感应电动势方向与题目规定的正方向相同，也就是逆时针方向。当 $t=0$ 时，
+该式的符号由 $\cos\omega t$ 决定。当 $\mathcal E(t)>0$ 时，感应电动势方向为题目规定的逆时针方向；当 $\mathcal E(t)<0$ 时，方向为顺时针。特别地，当 $t=0$ 时，
 \begin{equation}
  \emf(0)=\frac{\mu_0 l I_0\omega}{2\pi}\ln\frac{a+b}{a}>0.
  \label{eq:emf-zero}
@@ -306,7 +306,7 @@
  \item \textbf{把磁通量写成时间函数。} 备考时要养成习惯，不要一上来就求电动势，先把 $\Phi(t)$ 写清楚。
  \item \textbf{固定掌握三类经典模型。} 第一类是匀强磁场中导体棒切割磁感线；第二类是变化磁场中的闭合回路；第三类就是本题这种长直导线旁线圈的磁通量积分。
  \item \textbf{方向用楞次定律复核。} 算出符号后，再问自己感应电流产生的磁场是在阻碍磁通量增加还是阻碍磁通量减小。方向题最怕只凭直觉。
- \item \textbf{做题后检查量纲。} 式 \eqref{eq:emf-moving-magnitude} 中 $\mu_0 I_0 l v$ 除以长度平方，结果应为伏特；若量纲不对，通常是积分上下限或求导漏了一项。
+ \item \textbf{做题后检查量纲。} 式 \eqref{eq:emf-moving-magnitude} 中 $\mu_0 I_0 l b v$ 除以长度平方，结果应为伏特；若量纲不对，通常是积分上下限或求导漏了一项。
 \end{enumerate}
 \end{tipBox}
 
