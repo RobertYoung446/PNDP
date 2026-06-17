@@ -1,0 +1,313 @@
+\documentclass[11pt,a4paper,fontset=fandol]{ctexart}
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+
+\geometry{left=2.15cm,right=2.15cm,top=2.0cm,bottom=2.0cm}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.22em}
+\linespread{1.10}
+
+\definecolor{mainblue}{RGB}{39,91,150}
+\definecolor{lightblue}{RGB}{232,241,252}
+\definecolor{darkgray}{RGB}{65,65,65}
+\definecolor{lightgray}{RGB}{245,246,248}
+\definecolor{warn}{RGB}{156,87,34}
+\definecolor{softgreen}{RGB}{236,246,238}
+\definecolor{deepgreen}{RGB}{63,123,74}
+
+\titleformat{\section}{\large\bfseries\color{mainblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{darkgray}}{}{0em}{}
+\titlespacing*{\section}{0pt}{0.85em}{0.42em}
+\titlespacing*{\subsection}{0pt}{0.62em}{0.22em}
+
+\setlist[enumerate]{leftmargin=2.2em,itemsep=0.22em,topsep=0.22em}
+\setlist[itemize]{leftmargin=2.0em,itemsep=0.18em,topsep=0.18em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small 格物助航｜每日一练}
+\rhead{\small 2026.6.11}
+\cfoot{\small 第 \thepage\ 页 / 共 \pageref{LastPage} 页}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{problemBox}{
+ colback=lightblue,
+ colframe=mainblue,
+ arc=2mm,
+ boxrule=0.7pt,
+ left=1.0em,
+ right=1.0em,
+ top=0.75em,
+ bottom=0.75em,
+ before skip=0.55em,
+ after skip=0.75em
+}
+
+\newtcolorbox{tipBox}{
+ colback=lightgray,
+ colframe=darkgray,
+ arc=1.5mm,
+ boxrule=0.5pt,
+ left=0.9em,
+ right=0.9em,
+ top=0.55em,
+ bottom=0.55em,
+ before skip=0.45em,
+ after skip=0.45em
+}
+
+\newtcolorbox{warnBox}{
+ colback=white,
+ colframe=warn,
+ arc=1.5mm,
+ boxrule=0.6pt,
+ left=0.9em,
+ right=0.9em,
+ top=0.55em,
+ bottom=0.55em,
+ before skip=0.45em,
+ after skip=0.45em
+}
+
+\newtcolorbox{ideaBox}{
+ colback=softgreen,
+ colframe=deepgreen,
+ arc=1.5mm,
+ boxrule=0.6pt,
+ left=0.9em,
+ right=0.9em,
+ top=0.55em,
+ bottom=0.55em,
+ before skip=0.45em,
+ after skip=0.45em
+}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\emf}{\mathcal{E}}
+\graphicspath{{fig_6.11/}}
+
+\begin{document}
+
+\begin{center}
+ {\Large\bfseries\color{mainblue} 格物助航｜每日一练}\par
+ \vspace{0.25em}
+ {\large 物理学：电磁感应}\par
+ \vspace{0.35em}
+ {\small 2026年6月11日}\par
+ \vspace{0.35em}
+ {\small 编写：拯救世界的大小王}
+\end{center}
+
+\vspace{-0.3em}
+
+\begin{problemBox}
+\noindent\textbf{题目：长直导线旁矩形线圈中的感应电动势}\quad
+如图所示，一根无限长直导线与矩形线圈 $ABCD$ 共面。长直导线中的电流沿竖直向上方向，矩形线圈的左边 $AD$ 与长直导线平行，二者相距为 $a$，线圈宽度为 $b$，高度为 $l$，线圈总电阻为 $\mathcal R$。忽略线圈自感。规定从纸面看逆时针方向为线圈电流正方向，面积正方向取垂直纸面向外。
+
+\begin{center}
+ \includegraphics[width=0.86\linewidth]{induction_loop_wire.png}
+\end{center}
+
+\begin{enumerate}
+ \item 当线圈固定不动，长直导线中的电流为
+ \[
+ I(t)=I_0\sin\omega t
+ \]
+ 时，求穿过线圈的磁通量 $\Phi(t)$、感应电动势 $\emf(t)$，并判断 $t=0$ 时的感应电流方向。
+ \item 当长直导线中的电流保持为常量 $I_0$，线圈以速度 $v$ 沿远离长直导线的方向匀速运动时，设初始距离为 $a_0$，即
+ \[
+ a(t)=a_0+vt,
+ \]
+ 求任意时刻的感应电动势大小和感应电流方向。
+ \item 若只关心感应电流大小，写出上述两种情况下 $i(t)$ 的表达式。
+\end{enumerate}
+\end{problemBox}
+
+\section*{题目分析}
+\begin{ideaBox}
+本题是电磁感应中的经典题型，考察方向与复习题中长直导线旁矩形线框的感应电动势问题一致。关键不在于套一个固定结论，而在于先写出长直导线的磁场分布，再对线圈面积积分求磁通量，最后用法拉第电磁感应定律求感应电动势。
+
+这类题的核心矛盾是磁场不均匀。长直导线的磁感应强度与距离成反比，所以不能简单写成 $\Phi=BS$，必须把线圈分成许多窄条，对距离变量积分。若电流随时间变化，是感生电动势；若线圈位置随时间变化，是动生电动势。两种情况的数学形式都来自同一个磁通量函数。
+\end{ideaBox}
+
+\section*{详细解法}
+
+\subsection*{一、先写出长直导线右侧的磁场}
+长直导线中电流向上，根据右手螺旋定则，导线右侧磁场方向垂直纸面向里。距离导线为 $x$ 处的磁感应强度大小为
+\begin{equation}
+ B(x,t)=\frac{\mu_0 I(t)}{2\pi x}.
+ \label{eq:b-long-wire}
+\end{equation}
+
+由于题目规定面积正方向垂直纸面向外，而磁场方向垂直纸面向里，所以磁通量带负号。取线圈内一条宽度为 $\dd x$、高度为 $l$ 的窄条，其面积为 $l\dd x$，于是穿过线圈的磁通量为
+\begin{equation}
+ \Phi(t)=-\int_a^{a+b}\frac{\mu_0 I(t)}{2\pi x}l\dd x.
+ \label{eq:flux-integral}
+\end{equation}
+
+积分得
+\begin{equation}
+ \Phi(t)=-\frac{\mu_0 l I(t)}{2\pi}\ln\frac{a+b}{a}.
+ \label{eq:flux-general}
+\end{equation}
+
+式 \eqref{eq:flux-general} 是本题最重要的中间结果。后面无论电流变化还是位置变化，都从它出发。
+
+\subsection*{二、线圈固定，电流随时间变化}
+当
+\begin{equation}
+ I(t)=I_0\sin\omega t
+ \label{eq:current-sinusoidal}
+\end{equation}
+时，由式 \eqref{eq:flux-general} 得
+\begin{equation}
+ \Phi(t)=-\frac{\mu_0 l I_0}{2\pi}\ln\frac{a+b}{a}\sin\omega t.
+ \label{eq:flux-sinusoidal}
+\end{equation}
+
+由法拉第电磁感应定律
+\begin{equation}
+ \emf(t)=-\frac{\dd\Phi}{\dd t},
+ \label{eq:faraday-law}
+\end{equation}
+可得
+\begin{equation}
+ \emf(t)=\frac{\mu_0 l I_0\omega}{2\pi}\ln\frac{a+b}{a}\cos\omega t.
+ \label{eq:emf-sinusoidal}
+\end{equation}
+
+这里的正号表示感应电动势方向与题目规定的正方向相同，也就是逆时针方向。当 $t=0$ 时，
+\begin{equation}
+ \emf(0)=\frac{\mu_0 l I_0\omega}{2\pi}\ln\frac{a+b}{a}>0.
+ \label{eq:emf-zero}
+\end{equation}
+
+因此 $t=0$ 时感应电流方向为逆时针方向。也可以用楞次定律判断：此时长直导线电流正在增大，穿过线圈的向里磁通量正在增加，感应电流必须产生向外的磁场来阻碍这种增加，所以感应电流为逆时针方向。
+
+\subsection*{三、电流恒定，线圈远离导线运动}
+当电流保持为 $I_0$，线圈远离导线运动时，线圈左边到导线的距离变为
+\begin{equation}
+ a(t)=a_0+vt.
+ \label{eq:a-motion}
+\end{equation}
+
+把式 \eqref{eq:a-motion} 代入式 \eqref{eq:flux-general}，得到
+\begin{equation}
+ \Phi(t)=-\frac{\mu_0 l I_0}{2\pi}\ln\frac{a_0+vt+b}{a_0+vt}.
+ \label{eq:flux-moving}
+\end{equation}
+
+继续使用法拉第电磁感应定律，有
+\begin{equation}
+ \emf(t)=-\frac{\dd\Phi}{\dd t}.
+ \label{eq:faraday-moving}
+\end{equation}
+
+对式 \eqref{eq:flux-moving} 求导。先计算
+\begin{equation}
+ \frac{\dd}{\dd t}\ln\frac{a_0+vt+b}{a_0+vt}
+ =\frac{v}{a_0+vt+b}-\frac{v}{a_0+vt}
+ =-\frac{bv}{(a_0+vt)(a_0+vt+b)}.
+ \label{eq:log-derivative}
+\end{equation}
+
+因此
+\begin{equation}
+ \emf(t)=-\frac{\mu_0 l I_0 b v}{2\pi (a_0+vt)(a_0+vt+b)}.
+ \label{eq:emf-moving-signed}
+\end{equation}
+
+式 \eqref{eq:emf-moving-signed} 中负号表示感应电动势方向与规定的逆时针正方向相反，所以感应电流方向为顺时针方向。用楞次定律也能得到同样结论：线圈远离导线时，穿过线圈的向里磁通量减小，感应电流要产生向里的磁场来阻碍减小，所以电流方向为顺时针方向。
+
+感应电动势大小为
+\begin{equation}
+ |\emf(t)|=\frac{\mu_0 l I_0 b v}{2\pi (a_0+vt)(a_0+vt+b)}.
+ \label{eq:emf-moving-magnitude}
+\end{equation}
+
+\subsection*{四、感应电流大小}
+由欧姆定律，感应电流大小为
+\begin{equation}
+ i=\frac{|\emf|}{\mathcal R}.
+ \label{eq:ohm-law}
+\end{equation}
+
+线圈固定、电流按正弦规律变化时，感应电流大小为
+\begin{equation}
+ i_1(t)=\frac{\mu_0 l I_0\omega}{2\pi\mathcal R}\ln\frac{a+b}{a}\,|\cos\omega t|.
+ \label{eq:current-sinusoidal-result}
+\end{equation}
+
+电流恒定、线圈远离导线运动时，感应电流大小为
+\begin{equation}
+ i_2(t)=\frac{\mu_0 l I_0 b v}{2\pi\mathcal R (a_0+vt)(a_0+vt+b)}.
+ \label{eq:current-moving-result}
+\end{equation}
+
+\section*{答案汇总}
+\begin{ideaBox}
+\begin{enumerate}
+ \item 线圈固定，电流为 $I(t)=I_0\sin\omega t$ 时，磁通量为
+ \[
+ \Phi(t)=-\frac{\mu_0 l I_0}{2\pi}\ln\frac{a+b}{a}\sin\omega t.
+ \]
+ 感应电动势为
+ \[
+ \emf(t)=\frac{\mu_0 l I_0\omega}{2\pi}\ln\frac{a+b}{a}\cos\omega t.
+ \]
+ $t=0$ 时感应电流为逆时针方向。
+ \item 电流保持 $I_0$，线圈远离导线运动时，感应电动势大小为
+ \[
+ |\emf(t)|=\frac{\mu_0 l I_0 b v}{2\pi (a_0+vt)(a_0+vt+b)}.
+ \]
+ 感应电流方向为顺时针方向。
+ \item 两种情况下的感应电流大小分别为式 \eqref{eq:current-sinusoidal-result} 和式 \eqref{eq:current-moving-result}。
+\end{enumerate}
+\end{ideaBox}
+
+\section*{技巧与知识点}
+\begin{tipBox}
+\begin{enumerate}
+ \item \textbf{先写磁场，再算磁通。} 长直导线磁场满足式 \eqref{eq:b-long-wire}，由于 $B$ 随距离变化，不能直接使用 $\Phi=BS$。
+ \item \textbf{磁通量积分是核心。} 本题的关键是式 \eqref{eq:flux-integral} 到式 \eqref{eq:flux-general}。一旦磁通量写对，后面只是对时间求导。
+ \item \textbf{感生和动生可以统一处理。} 电流变化导致 $I(t)$ 变，位置变化导致 $a(t)$ 变，但都可以代入同一个磁通量表达式，再用 $\emf=-\dd\Phi/\dd t$。
+ \item \textbf{方向判断要结合正方向。} 先用题目规定判断符号，再用楞次定律验证物理方向。符号和楞次定律应当相互一致。
+ \item \textbf{对数项来自不均匀磁场。} 只要看到长直导线旁矩形线圈，结果中常会出现 $\ln\frac{a+b}{a}$，这是积分 $\int_a^{a+b}\frac{1}{x}\dd x$ 的结果。
+\end{enumerate}
+\end{tipBox}
+
+\section*{常见误区}
+\begin{warnBox}
+\begin{enumerate}
+ \item \textbf{误区一：把磁场当成匀强磁场。} 若直接取某一点磁场乘以面积，会漏掉 $1/x$ 的空间变化，导致没有对数项。
+ \item \textbf{误区二：忘记磁通量的正负号。} 题目规定面积正方向向外，而长直导线右侧磁场向里，所以磁通量应带负号。
+ \item \textbf{误区三：只会背楞次定律，不会算大小。} 楞次定律主要判断方向，大小仍要靠磁通量变化率计算。
+ \item \textbf{误区四：运动情况中把 $a$ 当成常量。} 线圈远离导线时，$a$ 应写成 $a_0+vt$，求导时必须对整个对数函数求导。
+ \item \textbf{误区五：把感应电动势方向和电流方向分开处理。} 在线圈总电阻为正的情况下，感应电流方向与感应电动势方向一致。
+\end{enumerate}
+\end{warnBox}
+
+\section*{备考建议}
+\begin{tipBox}
+电磁感应题建议按下面的步骤训练。
+\begin{enumerate}
+ \item \textbf{先判断磁场来源。} 若磁场来自长直导线，优先写 $B=\mu_0 I/(2\pi x)$；若磁场匀强，才考虑直接用 $BS$。
+ \item \textbf{再判断磁通量为什么变。} 磁通量变化可能来自磁场变、面积变、角度变或位置变。本题第一问是磁场变，第二问是位置变。
+ \item \textbf{把磁通量写成时间函数。} 备考时要养成习惯，不要一上来就求电动势，先把 $\Phi(t)$ 写清楚。
+ \item \textbf{固定掌握三类经典模型。} 第一类是匀强磁场中导体棒切割磁感线；第二类是变化磁场中的闭合回路；第三类就是本题这种长直导线旁线圈的磁通量积分。
+ \item \textbf{方向用楞次定律复核。} 算出符号后，再问自己感应电流产生的磁场是在阻碍磁通量增加还是阻碍磁通量减小。方向题最怕只凭直觉。
+ \item \textbf{做题后检查量纲。} 式 \eqref{eq:emf-moving-magnitude} 中 $\mu_0 I_0 l v$ 除以长度平方，结果应为伏特；若量纲不对，通常是积分上下限或求导漏了一项。
+\end{enumerate}
+\end{tipBox}
+
+\end{document}
